@@ -42,10 +42,10 @@ BSP_BUTTON_3 = Tecla Atrás en el pin 7
 
 */
 
-#define BUTTON_1 8 // Tecla 1: ATRÁS (Pin 7)
+#define BUTTON_1 5 // Tecla 1: ATRÁS (Pin 7)
 #define BUTTON_2 6 // Tecla 2: OK    (Pin 6)
 #define BUTTON_3 7 // Tecla 3: ARRIBA(Pin 7)
-#define BUTTON_4 5 // Tecla 4: ABAJO (Pin 5)
+#define BUTTON_4 8 // Tecla 4: ABAJO (Pin 5)
 
 #define BUTTON_PULL NRF_GPIO_PIN_PULLUP
 #define BUTTONS_ACTIVE_STATE 0
