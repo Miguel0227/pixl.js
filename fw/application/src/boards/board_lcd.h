@@ -16,59 +16,51 @@
 #define BSP_LED_0 LED_1
 
 // =================================================================
-// SOLUCIÓN FINAL - MAPA CRUZADO (7 y 8)
-// Lógica:
-// Botón 1 (Atrás) = PIN 7 (Detectado porque activaba la función asignada al 7)
-// Botón 2 (OK)    = PIN 6 (Correcto)
-// Botón 3 (Arriba)= PIN 5 (Correcto)
-// Botón 4 (Abajo) = PIN 8 (Por descarte)
+// SOLUCIÓN FINAL - MAPEO FÍSICO REAL
 // =================================================================
 
 #define BUTTONS_NUMBER 4
-#define BUTTON_START 5 // Ajustamos el rango de escaneo
-#define BUTTON_STOP 8
 
-// --- ASIGNACIÓN DE PINES ---
+// --- ¡CORRECCIÓN IMPORTANTE! ---
+// El escaneo debe empezar en 4 porque tu botón ABAJO es el Pin 4.
+// Antes empezaba en 5, por eso el botón de abajo estaba "muerto".
+#define BUTTON_START 4
+#define BUTTON_STOP 7
 
-/*
+// --- ASIGNACIÓN DE PINES (Tus hallazgos reales) ---
+// Asignamos nombres claros para no confundirnos con números
 
-ATRAS = Pin 7
+#define PIN_ARRIBA 5 // Tu botón físico 3
+#define PIN_OK 6     // Tu botón físico 2
+#define PIN_ATRÁS 7  // Tu botón físico 1
+#define PIN_ABAJO 4  // Tu botón físico 4
 
-OK = Pin 6
-
-ARRIBA = Pin 5
-
-ABAJO = Pin 4
-
-
-BSP_BUTTON_3 = Tecla Atrás
-
-BSP_BUTTON_1 = Tecla OK
-
-BSP_BUTTON_2 = Tecla Arriba
-
-BSP_BUTTON_0 = Tecla abajo
-
-
-
-*/
-
-#define BUTTON_1 5 // Tecla 1: ATRÁS (Pin 8)
-#define BUTTON_2 6 // Tecla 2: OK    (Pin 6)
-#define BUTTON_3 7 // Tecla 3: ARRIBA(Pin 7)
-#define BUTTON_4 8 // Tecla 4: ABAJO (Pin 5)
+// Asignamos esos pines a las variables del sistema
+#define BUTTON_1 PIN_ARRIBA
+#define BUTTON_2 PIN_OK
+#define BUTTON_3 PIN_ABAJO
+#define BUTTON_4 PIN_ATRÁS
 
 #define BUTTON_PULL NRF_GPIO_PIN_PULLUP
 #define BUTTONS_ACTIVE_STATE 0
 
-// Lista ordenada
+// --- LA LISTA ORDENADA (El orden aquí define el índice 0, 1, 2, 3) ---
 #define BUTTONS_LIST {BUTTON_1, BUTTON_2, BUTTON_3, BUTTON_4}
 
-// --- MAPEO DE FUNCIONES ---
-#define BSP_BUTTON_0 BUTTON_1 // Función Atrás
-#define BSP_BUTTON_1 BUTTON_2 // Función OK
-#define BSP_BUTTON_2 BUTTON_3 // Función Arriba
-#define BSP_BUTTON_3 BUTTON_4 // Función Abajo
+// --- MAPEO DE FUNCIONES LÓGICAS ---
+// Aquí conectamos la lógica del software con tus pines
+
+// El sistema llama "Button 0" a la función de SUBIR/IZQUIERDA
+#define BSP_BUTTON_0 BUTTON_1 // Conectado a Pin 5 (Arriba)
+
+// El sistema llama "Button 1" a la función de OK/ENTER
+#define BSP_BUTTON_1 BUTTON_2 // Conectado a Pin 6 (OK)
+
+// El sistema llama "Button 2" a la función de BAJAR/DERECHA
+#define BSP_BUTTON_2 BUTTON_3 // Conectado a Pin 4 (Abajo)
+
+// El sistema llama "Button 3" a la función de ATRÁS/CANCELAR
+#define BSP_BUTTON_3 BUTTON_4 // Conectado a Pin 7 (Atrás)
 
 // display config
 // #define OLED_SCREEN
