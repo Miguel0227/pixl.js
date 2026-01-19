@@ -25,41 +25,42 @@
 #define BUTTON_START 5
 
 // =================================================================
-// SEGUNDO INTENTO DE CORRECCIÓN DE BOTONES PARA JOYSFUSION
-// Basado en pruebas: Pin 6 es OK, Pin 5 es Arriba.
+// TERCER INTENTO - LA VENCIDA
+// Lógica corregida según tus pruebas:
+// Pin 8 detectado en Botón 1. Pin 7 asignado por descarte a Botón 4.
 // =================================================================
 
 #define BUTTONS_NUMBER 4
 
-// --- ASIGNACIÓN DE PINES FÍSICOS ---
+// --- ASIGNACIÓN DE PINES FÍSICOS CORREGIDA ---
 
-// Hipótesis: Probamos el Pin 7 para el botón físico de "Atrás".
-#define BUTTON_1 7 // Tu Tecla 1 (Física: Atrás)
+// CORRECCIÓN: Tu botón 1 (Físico) es el Pin 8.
+// Le asignamos la función lógica BUTTON_1 (que el sistema usa para "Atrás")
+#define BUTTON_1 8 // Tecla 1: Ahora será ATRÁS
 
-// CONFIRMADO: El Pin 6 es tu botón de "OK".
-#define BUTTON_2 6 // Tu Tecla 2 (Física: OK)
+// CONFIRMADO: OK sigue siendo Pin 6.
+#define BUTTON_2 6 // Tecla 2: OK
 
-// CONFIRMADO POR DEDUCCIÓN: Tu botón físico de "Arriba" es el Pin 5.
-// Lo asignamos aquí para que haga la función de Arriba.
-#define BUTTON_3 5 // Tu Tecla 3 (Física: Arriba)
+// CONFIRMADO: ARRIBA sigue siendo Pin 5.
+#define BUTTON_3 5 // Tecla 3: ARRIBA
 
-// Hipótesis: Probamos el Pin 8 para el botón físico de "Abajo".
-#define BUTTON_4 8 // Tu Tecla 4 (Física: Abajo)
+// CORRECCIÓN: Por descarte, tu botón 4 (Físico) es el Pin 7.
+// Le asignamos la función lógica BUTTON_4 (que el sistema usa para "Abajo")
+#define BUTTON_4 7 // Tecla 4: Ahora será ABAJO
 
 #define BUTTON_STOP 8
 #define BUTTON_PULL NRF_GPIO_PIN_PULLUP
 
 #define BUTTONS_ACTIVE_STATE 0
 
-// Lista ordenada de botones
+// Lista ordenada
 #define BUTTONS_LIST {BUTTON_1, BUTTON_2, BUTTON_3, BUTTON_4}
 
-// --- MAPEO LÓGICO (ESTO NO SE TOCA) ---
-// Esto le dice al sistema qué función hace cada botón de la lista de arriba.
-#define BSP_BUTTON_0 BUTTON_1 // Función: Atrás / Izquierda
-#define BSP_BUTTON_1 BUTTON_2 // Función: OK / Entrar
-#define BSP_BUTTON_2 BUTTON_3 // Función: Arriba / Siguiente
-#define BSP_BUTTON_3 BUTTON_4 // Función: Abajo / Anterior
+// --- MAPEO LÓGICO ---
+#define BSP_BUTTON_0 BUTTON_1 // Atrás
+#define BSP_BUTTON_1 BUTTON_2 // OK
+#define BSP_BUTTON_2 BUTTON_3 // Arriba
+#define BSP_BUTTON_3 BUTTON_4 // Abajo
 
 // display config
 // #define OLED_SCREEN
