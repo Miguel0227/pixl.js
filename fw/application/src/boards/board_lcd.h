@@ -25,8 +25,8 @@
 // =================================================================
 
 #define BUTTONS_NUMBER 4
-#define BUTTON_START 5 // Ajustamos el rango de escaneo
-#define BUTTON_STOP 8
+#define BUTTON_START 4 // Ajustamos el rango de escaneo
+#define BUTTON_STOP 7
 
 // --- ASIGNACIÓN DE PINES ---
 
@@ -34,9 +34,9 @@
 
 BSP_BUTTON_1 = Tecla OK en el pin 6
 
-BSP_BUTTON_2 = Tecla Arriba en el pin 5
+BSP_BUTTON_2 = Tecla Arriba en el pin 4
 
-BSP_BUTTON_0 = Tecla abajo en el pin 4
+BSP_BUTTON_0 = Tecla abajo en el pin 5
 
 BSP_BUTTON_3 = Tecla Atrás en el pin 7
 
