@@ -24,28 +24,42 @@
 
 #define BUTTON_START 5
 
-// 2. Aquí asignamos los PINES físicos.
-// He reordenado los números basándome en tu problema para intentar corregir el orden.
-// Si no quedan perfectos a la primera, solo tienes que cambiar estos números (5, 6, 7, 8) de lugar.
+// =================================================================
+// SEGUNDO INTENTO DE CORRECCIÓN DE BOTONES PARA JOYSFUSION
+// Basado en pruebas: Pin 6 es OK, Pin 5 es Arriba.
+// =================================================================
 
-#define BUTTON_1 5 // Tu Tecla 1 (Antes iba arriba, intentaremos que sea Atrás)
-#define BUTTON_2 6 // Tu Tecla 2 (OK - Esta estaba bien)
-#define BUTTON_3 8 // Tu Tecla 3 (Antes iba abajo. Probamos el PIN 8 aquí)
-#define BUTTON_4 7 // Tu Tecla 4 (La que estaba muerta. Probamos el PIN 7 aquí)
+#define BUTTONS_NUMBER 4
+
+// --- ASIGNACIÓN DE PINES FÍSICOS ---
+
+// Hipótesis: Probamos el Pin 7 para el botón físico de "Atrás".
+#define BUTTON_1 7 // Tu Tecla 1 (Física: Atrás)
+
+// CONFIRMADO: El Pin 6 es tu botón de "OK".
+#define BUTTON_2 6 // Tu Tecla 2 (Física: OK)
+
+// CONFIRMADO POR DEDUCCIÓN: Tu botón físico de "Arriba" es el Pin 5.
+// Lo asignamos aquí para que haga la función de Arriba.
+#define BUTTON_3 5 // Tu Tecla 3 (Física: Arriba)
+
+// Hipótesis: Probamos el Pin 8 para el botón físico de "Abajo".
+#define BUTTON_4 8 // Tu Tecla 4 (Física: Abajo)
 
 #define BUTTON_STOP 8
 #define BUTTON_PULL NRF_GPIO_PIN_PULLUP
 
 #define BUTTONS_ACTIVE_STATE 0
 
-// 3. Agregamos el BUTTON_4 a la lista
+// Lista ordenada de botones
 #define BUTTONS_LIST {BUTTON_1, BUTTON_2, BUTTON_3, BUTTON_4}
 
-// 4. Asignamos los botones lógicos
-#define BSP_BUTTON_0 BUTTON_1
-#define BSP_BUTTON_1 BUTTON_2
-#define BSP_BUTTON_2 BUTTON_3
-#define BSP_BUTTON_3 BUTTON_4
+// --- MAPEO LÓGICO (ESTO NO SE TOCA) ---
+// Esto le dice al sistema qué función hace cada botón de la lista de arriba.
+#define BSP_BUTTON_0 BUTTON_1 // Función: Atrás / Izquierda
+#define BSP_BUTTON_1 BUTTON_2 // Función: OK / Entrar
+#define BSP_BUTTON_2 BUTTON_3 // Función: Arriba / Siguiente
+#define BSP_BUTTON_3 BUTTON_4 // Función: Abajo / Anterior
 
 // display config
 // #define OLED_SCREEN
