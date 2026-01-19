@@ -25,8 +25,8 @@
 // =================================================================
 
 #define BUTTONS_NUMBER 4
-#define BUTTON_START 4 // Ajustamos el rango de escaneo
-#define BUTTON_STOP 7
+#define BUTTON_START 5 // Ajustamos el rango de escaneo
+#define BUTTON_STOP 8
 
 // --- ASIGNACIÓN DE PINES ---
 
@@ -41,20 +41,22 @@ ARRIBA = Pin 5
 ABAJO = Pin 4
 
 
-BSP_BUTTON_1 = Tecla OK en el pin 6 check
+BSP_BUTTON_3 = Tecla Atrás
 
-BSP_BUTTON_2 = Tecla Arriba en el pin 7 check
+BSP_BUTTON_1 = Tecla OK
 
-BSP_BUTTON_0 = Tecla abajo en el pin 5
+BSP_BUTTON_2 = Tecla Arriba
 
-BSP_BUTTON_3 = Tecla Atrás en el pin 7
+BSP_BUTTON_0 = Tecla abajo
+
+
 
 */
 
-#define BUTTON_1 7 // Tecla 1: ATRÁS (Pin 8)
+#define BUTTON_1 5 // Tecla 1: ATRÁS (Pin 8)
 #define BUTTON_2 6 // Tecla 2: OK    (Pin 6)
-#define BUTTON_3 5 // Tecla 3: ARRIBA(Pin 7)
-#define BUTTON_4 4 // Tecla 4: ABAJO (Pin 5)
+#define BUTTON_3 7 // Tecla 3: ARRIBA(Pin 7)
+#define BUTTON_4 8 // Tecla 4: ABAJO (Pin 5)
 
 #define BUTTON_PULL NRF_GPIO_PIN_PULLUP
 #define BUTTONS_ACTIVE_STATE 0
