@@ -15,52 +15,37 @@
 
 #define BSP_LED_0 LED_1
 
-// ==========================================
-// CORRECCIÓN DE BOTONES PARA JOYSFUSION (4 TECLAS)
-// ==========================================
-
-// 1. Cambiamos la cantidad de botones a 4
-#define BUTTONS_NUMBER 4
-
-#define BUTTON_START 5
-
 // =================================================================
-// TERCER INTENTO - LA VENCIDA
-// Lógica corregida según tus pruebas:
-// Pin 8 detectado en Botón 1. Pin 7 asignado por descarte a Botón 4.
+// SOLUCIÓN FINAL - MAPA CRUZADO (7 y 8)
+// Lógica:
+// Botón 1 (Atrás) = PIN 7 (Detectado porque activaba la función asignada al 7)
+// Botón 2 (OK)    = PIN 6 (Correcto)
+// Botón 3 (Arriba)= PIN 5 (Correcto)
+// Botón 4 (Abajo) = PIN 8 (Por descarte)
 // =================================================================
 
 #define BUTTONS_NUMBER 4
-
-// --- ASIGNACIÓN DE PINES FÍSICOS CORREGIDA ---
-
-// CORRECCIÓN: Tu botón 1 (Físico) es el Pin 8.
-// Le asignamos la función lógica BUTTON_1 (que el sistema usa para "Atrás")
-#define BUTTON_1 8 // Tecla 1: Ahora será ATRÁS
-
-// CONFIRMADO: OK sigue siendo Pin 6.
-#define BUTTON_2 6 // Tecla 2: OK
-
-// CONFIRMADO: ARRIBA sigue siendo Pin 5.
-#define BUTTON_3 5 // Tecla 3: ARRIBA
-
-// CORRECCIÓN: Por descarte, tu botón 4 (Físico) es el Pin 7.
-// Le asignamos la función lógica BUTTON_4 (que el sistema usa para "Abajo")
-#define BUTTON_4 7 // Tecla 4: Ahora será ABAJO
-
+#define BUTTON_START 5 // Ajustamos el rango de escaneo
 #define BUTTON_STOP 8
-#define BUTTON_PULL NRF_GPIO_PIN_PULLUP
 
+// --- ASIGNACIÓN DE PINES ---
+
+#define BUTTON_1 7 // Tecla 1: ATRÁS (Pin 7)
+#define BUTTON_2 6 // Tecla 2: OK    (Pin 6)
+#define BUTTON_3 5 // Tecla 3: ARRIBA(Pin 5)
+#define BUTTON_4 8 // Tecla 4: ABAJO (Pin 8)
+
+#define BUTTON_PULL NRF_GPIO_PIN_PULLUP
 #define BUTTONS_ACTIVE_STATE 0
 
 // Lista ordenada
 #define BUTTONS_LIST {BUTTON_1, BUTTON_2, BUTTON_3, BUTTON_4}
 
-// --- MAPEO LÓGICO ---
-#define BSP_BUTTON_0 BUTTON_1 // Atrás
-#define BSP_BUTTON_1 BUTTON_2 // OK
-#define BSP_BUTTON_2 BUTTON_3 // Arriba
-#define BSP_BUTTON_3 BUTTON_4 // Abajo
+// --- MAPEO DE FUNCIONES ---
+#define BSP_BUTTON_0 BUTTON_1 // Función Atrás
+#define BSP_BUTTON_1 BUTTON_2 // Función OK
+#define BSP_BUTTON_2 BUTTON_3 // Función Arriba
+#define BSP_BUTTON_3 BUTTON_4 // Función Abajo
 
 // display config
 // #define OLED_SCREEN
