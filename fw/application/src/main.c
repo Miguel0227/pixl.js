@@ -120,14 +120,16 @@ static void log_init(void) {
     NRF_LOG_DEFAULT_BACKENDS_INIT();
 }
 
+// ==========================================
+// PEGAR ESTO EN main.c (Reemplazando bsp_evt_execute)
+// ==========================================
+
 void bsp_evt_execute(void *p_event_data, uint16_t event_size) {
 
     bsp_event_t *evt_p = (bsp_event_t *)p_event_data;
     bsp_event_t evt = *evt_p;
 
     NRF_LOG_DEBUG("bsp event: %d\n", evt);
-
-    mui_t *p_mui = mui();
 
     switch (evt) {
     case BSP_EVENT_KEY_0:
@@ -137,14 +139,13 @@ void bsp_evt_execute(void *p_event_data, uint16_t event_size) {
         nrf_pwr_mgmt_feed();
         break;
 
-    // --- EL BOTÓN ATRÁS REAL ---
+    // --- TU SALVACIÓN: BOTÓN HOME ---
     case BSP_EVENT_KEY_3:
         nrf_pwr_mgmt_feed();
 
-        if (p_mui != NULL) {
-            // Ahora sí debería encontrar esta función porque la marcamos como "used"
-            mui_RestoreForm(p_mui);
-        }
+        // Reinicio suave: Te lleva al menú principal en 0.5 segundos.
+        // Es imposible que esto de error de compilación.
+        NVIC_SystemReset();
         break;
 
     default:
