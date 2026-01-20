@@ -125,10 +125,9 @@ void bsp_evt_execute(void *p_event_data, uint16_t event_size) {
     bsp_event_t *evt_p = (bsp_event_t *)p_event_data;
     bsp_event_t evt = *evt_p;
 
-    // Debug
     NRF_LOG_DEBUG("bsp event: %d\n", evt);
 
-    // IMPORTANTE: Definimos la variable de la interfaz aquí arriba
+    // Obtenemos el control de la interfaz
     mui_t *p_mui = mui();
 
     switch (evt) {
@@ -139,17 +138,24 @@ void bsp_evt_execute(void *p_event_data, uint16_t event_size) {
         nrf_pwr_mgmt_feed();
         break;
 
-    // --- AGREGAMOS TU BOTÓN DE ATRÁS ---
+    // --- LÓGICA DE "ATRÁS INTELIGENTE" ---
     case BSP_EVENT_KEY_3:
-        // Alimentamos la energía primero
-        nrf_pwr_mgmt_feed();
+        nrf_pwr_mgmt_feed(); // Despertar pantalla
 
-        // Intentamos volver al menú anterior
         if (p_mui != NULL) {
-            mui_RestoreForm(p_mui);
+            // Verificamos si hay un historial guardado (ID > 0)
+            // "last_form_id" es la variable que recuerda dónde estabas.
+            if (p_mui->last_form_id > 0) {
+                // Si hay historial, volvemos al menú anterior
+                mui_GotoForm(p_mui, p_mui->last_form_id, p_mui->last_form_cursor_focus_position);
+            } else {
+                // Si NO hay historial (o es 0), vamos al Menú Principal (Home)
+                // Esto evita que el botón deje de funcionar si no hay "atrás".
+                mui_GotoForm(p_mui, 1, 0);
+            }
         }
         break;
-        // -----------------------------------
+        // -------------------------------------
 
     default:
         break;
