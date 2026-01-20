@@ -125,14 +125,11 @@ void bsp_evt_execute(void *p_event_data, uint16_t event_size) {
     bsp_event_t *evt_p = (bsp_event_t *)p_event_data;
     bsp_event_t evt = *evt_p;
 
-    // Debug
     NRF_LOG_DEBUG("bsp event: %d\n", evt);
 
-    // Definimos la variable de la interfaz
     mui_t *p_mui = mui();
 
     switch (evt) {
-    // Los botones 0, 1 y 2 siguen igual
     case BSP_EVENT_KEY_0:
     case BSP_EVENT_KEY_1:
     case BSP_EVENT_KEY_2:
@@ -140,19 +137,15 @@ void bsp_evt_execute(void *p_event_data, uint16_t event_size) {
         nrf_pwr_mgmt_feed();
         break;
 
-    // --- BOTÓN 1 (Pin 7) COMO HOME ---
+    // --- EL BOTÓN ATRÁS REAL ---
     case BSP_EVENT_KEY_3:
-        // 1. Despertamos la pantalla
         nrf_pwr_mgmt_feed();
 
-        // 2. Ejecutamos "Ir al Inicio"
-        // Como no podemos "volver", al menos vamos a lo seguro.
         if (p_mui != NULL) {
-            // El 1 es siempre el menú principal
-            mui_GotoForm(p_mui, 1, 0);
+            // Ahora sí debería encontrar esta función porque la marcamos como "used"
+            mui_RestoreForm(p_mui);
         }
         break;
-        // ---------------------------------
 
     default:
         break;

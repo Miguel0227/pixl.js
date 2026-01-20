@@ -806,6 +806,7 @@ void mui_SaveForm(mui_t *ui)
 /*
   if called from a field function, then the current field variables are destroyed, so that call should be the last call in the field callback.
 */
+__attribute__((used))
 void mui_RestoreForm(mui_t *ui)
 {
   mui_GotoForm(ui, ui->last_form_id, ui->last_form_cursor_focus_position);
