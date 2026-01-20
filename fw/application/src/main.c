@@ -125,12 +125,14 @@ void bsp_evt_execute(void *p_event_data, uint16_t event_size) {
     bsp_event_t *evt_p = (bsp_event_t *)p_event_data;
     bsp_event_t evt = *evt_p;
 
+    // Debug
     NRF_LOG_DEBUG("bsp event: %d\n", evt);
 
-    // Obtenemos el control de la interfaz
+    // Definimos la variable de la interfaz
     mui_t *p_mui = mui();
 
     switch (evt) {
+    // Los botones 0, 1 y 2 siguen igual
     case BSP_EVENT_KEY_0:
     case BSP_EVENT_KEY_1:
     case BSP_EVENT_KEY_2:
@@ -138,24 +140,19 @@ void bsp_evt_execute(void *p_event_data, uint16_t event_size) {
         nrf_pwr_mgmt_feed();
         break;
 
-    // --- LÓGICA DE "ATRÁS INTELIGENTE" ---
+    // --- BOTÓN 1 (Pin 7) COMO HOME ---
     case BSP_EVENT_KEY_3:
-        nrf_pwr_mgmt_feed(); // Despertar pantalla
+        // 1. Despertamos la pantalla
+        nrf_pwr_mgmt_feed();
 
+        // 2. Ejecutamos "Ir al Inicio"
+        // Como no podemos "volver", al menos vamos a lo seguro.
         if (p_mui != NULL) {
-            // Verificamos si hay un historial guardado (ID > 0)
-            // "last_form_id" es la variable que recuerda dónde estabas.
-            if (p_mui->last_form_id > 0) {
-                // Si hay historial, volvemos al menú anterior
-                mui_GotoForm(p_mui, p_mui->last_form_id, p_mui->last_form_cursor_focus_position);
-            } else {
-                // Si NO hay historial (o es 0), vamos al Menú Principal (Home)
-                // Esto evita que el botón deje de funcionar si no hay "atrás".
-                mui_GotoForm(p_mui, 1, 0);
-            }
+            // El 1 es siempre el menú principal
+            mui_GotoForm(p_mui, 1, 0);
         }
         break;
-        // -------------------------------------
+        // ---------------------------------
 
     default:
         break;
