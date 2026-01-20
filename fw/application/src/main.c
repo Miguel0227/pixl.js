@@ -124,8 +124,12 @@ void bsp_evt_execute(void *p_event_data, uint16_t event_size) {
 
     bsp_event_t *evt_p = (bsp_event_t *)p_event_data;
     bsp_event_t evt = *evt_p;
+
+    // Debug
     NRF_LOG_DEBUG("bsp event: %d\n", evt);
-    // mui_input_on_bsp_event(evt);
+
+    // IMPORTANTE: Definimos la variable de la interfaz aquí arriba
+    mui_t *p_mui = mui();
 
     switch (evt) {
     case BSP_EVENT_KEY_0:
@@ -134,6 +138,19 @@ void bsp_evt_execute(void *p_event_data, uint16_t event_size) {
     case BTN_ACTION_KEY1_LONGPUSH:
         nrf_pwr_mgmt_feed();
         break;
+
+    // --- AGREGAMOS TU BOTÓN DE ATRÁS ---
+    case BSP_EVENT_KEY_3:
+        // Alimentamos la energía primero
+        nrf_pwr_mgmt_feed();
+
+        // Intentamos volver al menú anterior
+        if (p_mui != NULL) {
+            mui_RestoreForm(p_mui);
+        }
+        break;
+        // -----------------------------------
+
     default:
         break;
     }
